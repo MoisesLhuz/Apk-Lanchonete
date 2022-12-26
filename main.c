@@ -3,7 +3,6 @@
 #include <string.h>
 #include <locale.h>
 
-/* Membros da Equipe: Moises Santos da Luz, Carlos Emanuel, Gustavo Rocha, Gabriel Matias, Anderson Santana
 
 //* Estrutura das struct's para armazenamento dos dados */
 struct itemCardapio{ //* cardapio
@@ -51,7 +50,7 @@ void relatorio_PF(int pfLogin){ //* Função lista Relatorio de pedidos Pessoa Fis
 	system("cls");
 	printf("\nL i s t a    d e    P e d i d o s    R e s u m i d o\n\n\n");
 	for(i=0;i<200;i++){
-		if(pedido[i].numPedido != -1){
+		if(pedido[pfLogin].numPedido != -1){
 			printf("Numero do Pedido: %d\nTotal Quantidade de Itens: %d\nValor Total de Pedidos: %.2f\n\n", pedido[i].numPedido, pedido[i].somaQtd, pedido[i].valorPedido);	
 		}
 	}
@@ -63,7 +62,7 @@ void relatorio_PJ(int pjLogin){ //* Função lista Relatorio de pedidos Pessoa Jur
 	system("cls");
 	printf("\nL i s t a    d e    P e d i d o s    R e s u m i d o\n\n\n");
 	for(i=0;i<200;i++){
-		if(pedido[i].numPedido != -1){
+		if(pedido[pjLogin].numPedido != -1){
 			printf("Pedidos: %d\nTotal Quantidade de Itens: %d\nValor Total Pedidos: %.2f\n\n", pedido[i].numPedido, pedido[i].somaQtd, pedido[i].valorPedido);	
 		}
 	}
@@ -487,7 +486,7 @@ int modulo_Login(){ //* Localiza cadastros de logs/senha e compara dados */
 void incluir_itemPedido(pfLogin){ //* função cadastra pedidos */
 
 	int i, j, opc, qtd=0, lanchonete, lanche, item, resposta,y;
-	float valor, somaValor=0, taxa=0, acrescimos=0;
+	float valor=0, somaValor=0, taxa=0, acrescimos=0;
 
 
 
@@ -543,9 +542,9 @@ void incluir_itemPedido(pfLogin){ //* função cadastra pedidos */
 				printf("\nInforme a Quantidade: ");
 				scanf("%d", &qtd);
 				valor = lanch[lanchonete].cardapio[lanche].valor * qtd;
+				pedido[j].valorPedido += valor;
 				pedido[j].valorItem = lanche * qtd;
 				pedido[j].somaQtd += qtd;
-				pedido[j].valorPedido += valor;
 				lanch[lanchonete].cardapio[lanche].qtd = lanch[lanchonete].cardapio[lanche].qtd - qtd;
 
 				printf("\nDigite [1] para incluir mais itens no seu pedido.\nDigite [2] para finalizar seu pedido.\n");
@@ -569,21 +568,21 @@ void incluir_itemPedido(pfLogin){ //* função cadastra pedidos */
 						}
 				}while(resposta>4 || resposta<1);
 				if(resposta == 1){
-	                pedido[i].valorTotalPago += pedido[j].valorPedido;
+	                pedido[i].valorTotalPago = pedido[j].valorPedido;
 					printf("\nTotal a pagar: %.2f\n", pedido[i].valorTotalPago);
 	                }else
 	                    if(resposta == 2){
-	                        pedido[i].valorTotalPago += pedido[j].valorPedido;
+	                        pedido[i].valorTotalPago = pedido[j].valorPedido;
 							printf("Total a Pagar: %.2f\n\n", pedido[i].valorTotalPago);
 	                        }else
 	                            if(resposta== 3){
-	                        	pedido[i].valorTotalPago += pedido[j].valorPedido;
+	                        	pedido[i].valorTotalPago = pedido[j].valorPedido;
 								printf("Total a Pagar: %.2f\n\n", pedido[j].valorTotalPago);
 		                        }else
 									if(resposta == 4){
 		                            taxa = 1.00;
 		                            acrescimos = taxa * pedido[j].somaQtd;
-		                            pedido[j].valorTotalPago += pedido[j].valorPedido + acrescimos;
+		                            pedido[j].valorTotalPago = pedido[j].valorPedido + acrescimos;
 		                            printf("Total da Taxa: %.2f\n", acrescimos);
 		                            printf("Total a Pagar: %.2f\n\n", pedido[j].valorTotalPago);
 		                            printf("Pedido %d Finalizado com sucesso.\n\n", pedido[j].numPedido);
