@@ -21,21 +21,21 @@ struct dadosPedido{ //* v = pedido
 	float valorItem; //* valor de cada item */
 };
 
-struct dadosLanchonete{ //* v = lanch
+struct dadosLanchonete{ //* Dados armazenamento lanchonete
 	int codLanchonete;
     char nome[20], bairro[15], email[15], Telcontato[3][15], cnpj[15], login[10], senha[10];
 	struct itemCardapio cardapio[20];
 
 };
 
-struct dadosCliente{ //* v = cliente
+struct dadosCliente{ //* Dados armazenamento cliente
     int codCliente;
     char nome[10], sobrenome[10], cpf[11], Telcontato[3][12], login[10], senha[10];
 
 };
 
-//* Variáveis Globais */
-int NumeroLanchonete=1; //* variavel inicio de contagem cliente */
+//* VariÃ¡veis Globais */
+int NumeroLanchonete=1; //* variavel inicio de contagem lanchonete */
 int NumeroCliente=1; //* variavel inicio de contagem cliente */
 int NumeroCArdapio=1; //* variavel inicio de contagem cardapio */
 int Numeropedido=1; //* variavel inicio de contagem pedido */
@@ -43,8 +43,8 @@ struct dadosCliente cliente[100]; //* Cadastro Dados Cliente App */
 struct dadosLanchonete lanch[50]; //* Cadastro DadosLanchonete */
 struct dadosPedido pedido[200]; //* cadastro e dados do pedido */
 
-//* Estrutura de funções por modulos */
-void relatorio_PF(int pfLogin){ //* Função lista Relatorio de pedidos Pessoa Fisica Resumido */ 
+//* Estrutura de funÃ§Ãµes por modulos */
+void relatorio_PF(int pfLogin){ //* FunÃ§Ã£o lista Relatorio de pedidos Pessoa Fisica Resumido */ 
 	
 	int i;
 	system("cls");
@@ -56,7 +56,7 @@ void relatorio_PF(int pfLogin){ //* Função lista Relatorio de pedidos Pessoa Fis
 	}
 }	
 	
-void relatorio_PJ(int pjLogin){ //* Função lista Relatorio de pedidos Pessoa Juridica Resumido */ 
+void relatorio_PJ(int pjLogin){ //* FunÃ§Ã£o lista Relatorio de pedidos Pessoa Juridica Resumido */ 
 	
 	int i;
 	system("cls");
@@ -68,26 +68,26 @@ void relatorio_PJ(int pjLogin){ //* Função lista Relatorio de pedidos Pessoa Jur
 	}
 }	
 
-void apresentar_lanches(int codLanch){ //* Função busca e imprime o cardapio de uma lanchonete passada por parametro */
+void apresentar_lanches(int codLanch){ //* FunÃ§Ã£o busca e imprime o cardapio de uma lanchonete passada por parametro */
 
 	int t;
 	for(t=0; t<20; t++){
 		if(lanch[codLanch].cardapio[t].codItem != -1){
-		printf("\n%d - Item: %s\t\tValor unitário: %.2f\t\tQuantidade em estoque: %d\n", lanch[codLanch].cardapio[t].codItem, lanch[codLanch].cardapio[t].NomeItem, lanch[codLanch].cardapio[t].valor, lanch[codLanch].cardapio[t].qtd);
+		printf("\n%d - Item: %s\t\tValor unitÃ¡rio: %.2f\t\tQuantidade em estoque: %d\n", lanch[codLanch].cardapio[t].codItem, lanch[codLanch].cardapio[t].NomeItem, lanch[codLanch].cardapio[t].valor, lanch[codLanch].cardapio[t].qtd);
 		}		
 	}
 }
 
-int menu_PF(int pfLogin){ //* menu pessoa fisica que passa parametro para outras funções */
+int menu_PF(int pfLogin){ //* menu pessoa fisica que passa parametro para outras funÃ§Ãµes */
 
 	int opc;
 
 	do{
 		system("pause");
 		system("cls");
-		printf("Olá, %s", cliente[pfLogin].nome);
-		printf("\n\n---M E N U    U S U Á R I O---\n\n");
-		printf("\n[1] para Acessar o Cardápio.\n");
+		printf("OlÃ¡, %s", cliente[pfLogin].nome);
+		printf("\n\n---M E N U    U S U Ã R I O---\n\n");
+		printf("\n[1] para Acessar o CardÃ¡pio.\n");
 		printf("[2] para Resumo dos meus Pedidos.\n");
 		printf("[3] sair.\n");
 		scanf("%d", &opc);
@@ -97,10 +97,10 @@ int menu_PF(int pfLogin){ //* menu pessoa fisica que passa parametro para outras
 			case 1:
 				do{
 					incluir_itemPedido(pfLogin);
-					printf("Digite [6] para retornar ao Menu Usuário.\n");
+					printf("Digite [6] para retornar ao Menu UsuÃ¡rio.\n");
 					scanf("%d", &opc);
 					if(opc!=6){
-						printf("Opção Invalida!! Digite uma opção Válida!!!\n");
+						printf("OpÃ§Ã£o Invalida!! Digite uma opÃ§Ã£o VÃ¡lida!!!\n");
 					}
 				}while(opc!=6);
 				break;
@@ -109,23 +109,23 @@ int menu_PF(int pfLogin){ //* menu pessoa fisica que passa parametro para outras
 				break;
 			case 3:
 				break;
-			default: printf("Opção Invalida!! Digite uma opção Válida!!!\n");
+			default: printf("OpÃ§Ã£o Invalida!! Digite uma opÃ§Ã£o VÃ¡lida!!!\n");
 		}
 
 	}while(opc>3 || opc<1);
 
 }
 
-int menu_lanch(int pjLogin){ //* menu Lanchonete pessoa juridica que passa parametro para outras funções */
+int menu_lanch(int pjLogin){ //* menu Lanchonete pessoa juridica que passa parametro para outras funÃ§Ãµes */
 
 	int opc;
 
 	do{
 		system("pause");
 		system("cls");
-		printf("Olá, %s", lanch[pjLogin].nome);
+		printf("OlÃ¡, %s", lanch[pjLogin].nome);
 		printf("\n\n---M E N U    P R E S T A D O R---\n");
-		printf("\n[1] para Cadastrar seu Cardápio.\n");
+		printf("\n[1] para Cadastrar seu CardÃ¡pio.\n");
 		printf("[2] para Lista de Pedidos.\n");
 		printf("[3] sair.\n");
 		scanf("%d", &opc);
@@ -138,7 +138,7 @@ int menu_lanch(int pjLogin){ //* menu Lanchonete pessoa juridica que passa param
 					printf("Digite [6] para retornar ao Menu Prestador.\n");
 					scanf("%d", &opc);
 					if(opc!=6){
-						printf("Opção Invalida!! Digite uma opção Válida!!!\n");
+						printf("OpÃ§Ã£o Invalida!! Digite uma opÃ§Ã£o VÃ¡lida!!!\n");
 					}
 				}while(opc!=6);
 				break;
@@ -148,39 +148,39 @@ int menu_lanch(int pjLogin){ //* menu Lanchonete pessoa juridica que passa param
 			case 3:
 				
 				break;
-			default: printf("Opção Invalida!! Digite uma opção Válida!!!\n");
+			default: printf("OpÃ§Ã£o Invalida!! Digite uma opÃ§Ã£o VÃ¡lida!!!\n");
 		}
 
 	}while(opc>3 || opc<1);
 
 }
 
-int localizar_posicao_cardapio(int lanchonete, int cCardap){ //*Localiza uma posição VAZIA no vetor da struct cadastro/cardapio */
+int localizar_posicao_cardapio(int lanchonete, int cCardap){ //*Localiza uma posiÃ§Ã£o VAZIA no vetor da struct cadastro/cardapio */
     int s=0;
     while (lanch[lanchonete].cardapio[s].codItem != cCardap && s<20){
         s++;
     }
     if (lanch[lanchonete].cardapio[s].codItem == cCardap){
-        return s; //retorna a posiÃ§Ã£o vazia do vetor lanchonete
+        return s; //retorna a posiÃƒÂ§ÃƒÂ£o vazia do vetor lanchonete
     }
 
-    return -9; //retorna -9 para indicar que o cardapio nÃ£o foi localizado
+    return -9; //retorna -9 para indicar que o cardapio nÃƒÂ£o foi localizado
 }
 
-int localiza_posicao_SENHA_PJ(char cSENHAPJ[]){//* localiza posição e compara Senha pessoa juridica */
+int localiza_posicao_SENHA_PJ(char cSENHAPJ[]){//* localiza posiÃ§Ã£o e compara Senha pessoa juridica */
 
 	int s=0;
     while (strcmp(lanch[s].senha, cSENHAPJ)!= 0 && s<50){
         s++;
     }
     if (strcmp(lanch[s].senha, cSENHAPJ) == 0){
-        return s; //retorna a posiÃ§Ã£o da senha lanchonete
+        return s; //retorna a posiÃƒÂ§ÃƒÂ£o da senha lanchonete
     }
 
-    return -9; //retorna -9 para indicar que a senha PJ nÃ£o foi localizado
+    return -9; //retorna -9 para indicar que a senha PJ nÃƒÂ£o foi localizado
 }
 
-int localiza_posicao_LOGIN_PJ(char cLOGINPJ[]){ //* localiza posição e compara login pessoa juridico */
+int localiza_posicao_LOGIN_PJ(char cLOGINPJ[]){ //* localiza posiÃ§Ã£o e compara login pessoa juridico */
 
 	int s=0;
     while (strcmp(lanch[s].login, cLOGINPJ)!= 0 && s<50){
@@ -190,10 +190,10 @@ int localiza_posicao_LOGIN_PJ(char cLOGINPJ[]){ //* localiza posição e compara l
 			return s; //compara e retorna Login pessoa juridica
     }
 
-    return -9; //retorna -9 para indicar que o Login PJ nÃ£o foi localizado
+    return -9; //retorna -9 para indicar que o Login PJ nÃƒÂ£o foi localizado
 }
 
-int localiza_posicao_SENHA_PF(char cSENHAPF[]){ //* localiza posição e compara Senha pessoa fisica */
+int localiza_posicao_SENHA_PF(char cSENHAPF[]){ //* localiza posiÃ§Ã£o e compara Senha pessoa fisica */
 
 	int s=0;
     while (strcmp(cliente[s].senha, cSENHAPF)!= 0 && s<100){
@@ -203,85 +203,85 @@ int localiza_posicao_SENHA_PF(char cSENHAPF[]){ //* localiza posição e compara S
         return s; //compara e retorna Login pessoa fisica
     }
 
-    return -9; //retorna -9 para indicar que a senha nÃ£o foi localizado
+    return -9; //retorna -9 para indicar que a senha nÃƒÂ£o foi localizado
 }
 
-int localiza_posicao_LOGIN_PF(char cLOGINPF[]){ //* localiza posição e compara login pessoa fisica */
+int localiza_posicao_LOGIN_PF(char cLOGINPF[]){ //* localiza posiÃ§Ã£o e compara login pessoa fisica */
 
 	int s=0;
     while (strcmp(cliente[s].login, cLOGINPF)!= 0 && s<100){
 		s++;
     }
     if (strcmp(cliente[s].login, cLOGINPF) == 0){
-			return s; //compara e retorna a posiÃ§Ã£o Login
+			return s; //compara e retorna a posiÃƒÂ§ÃƒÂ£o Login
     }
 
-    return -9; //retorna -9 para indicar que o cliente nÃ£o foi localizado
+    return -9; //retorna -9 para indicar que o cliente nÃƒÂ£o foi localizado
 }
 
-int localizar_pedido(int pPed){ //*lozaliza uma posição VAZIA no vetor da struct dadosPedido */
+int localizar_pedido(int pPed){ //*lozaliza uma posiÃ§Ã£o VAZIA no vetor da struct dadosPedido */
     int j=0;
     while (pedido[j].numPedido != pPed && j<200){
         j++;
     }
     if (pedido[j].numPedido == pPed){
-        return j; //retorna a posiÃ§Ã£o vazia do numero pedido
+        return j; //retorna a posiÃƒÂ§ÃƒÂ£o vazia do numero pedido
     }
 
-    return -9; //retorna -9 para indicar que o numero pedido nÃ£o foi localizado
+    return -9; //retorna -9 para indicar que o numero pedido nÃƒÂ£o foi localizado
 }
 
-int localizarCliente(int cCli){ //*lozaliza uma posição VAZIA no vetor da struct cadastro/cliente */
+int localizarCliente(int cCli){ //*lozaliza uma posiÃ§Ã£o VAZIA no vetor da struct cadastro/cliente */
     int j=0;
     while (cliente[j].codCliente != cCli && j<100){
         j++;
     }
     if (cliente[j].codCliente == cCli){
-        return j; //retorna a posiÃ§Ã£o do cliente vazia
+        return j; //retorna a posiÃƒÂ§ÃƒÂ£o do cliente vazia
     }
 
-    return -9; //retorna -9 para indicar que o cliente nÃ£o foi localizado
+    return -9; //retorna -9 para indicar que o cliente nÃƒÂ£o foi localizado
 }
 
-int localiza_posicao_CPF(char cCPF[]){ //* localiza posição e compara CPF */
+int localiza_posicao_CPF(char cCPF[]){ //* localiza posiÃ§Ã£o e compara CPF */
 
 	int s=0;
     while (strcmp(cliente[s].cpf, cCPF)!= 0 && s<100){
         s++;
     }
     if (strcmp(cliente[s].cpf, cCPF) == 0){
-        return s; //compara e retorna a posiÃ§Ã£o do CPF
+        return s; //compara e retorna a posiÃƒÂ§ÃƒÂ£o do CPF
     }
 
-    return -9; //retorna -9 para indicar que o CPF nÃ£o foi localizado
+    return -9; //retorna -9 para indicar que o CPF nÃƒÂ£o foi localizado
 }
 
-int localiza_posicao_CNPJ(char cCNPJ[]){ //*localiza posição e compara CNPJ */
+int localiza_posicao_CNPJ(char cCNPJ[]){ //*localiza posiÃ§Ã£o e compara CNPJ */
 
 	int i=0;
     while (strcmp(lanch[i].cnpj, cCNPJ) != 0 && i<50){
         i++;
     }
     if (strcmp(lanch[i].cnpj,cCNPJ) == 0){
-        return i; //compara e retorna a posiÃ§Ã£o do CNPJ
+        return i; //compara e retorna a posiÃƒÂ§ÃƒÂ£o do CNPJ
     }
 
-    return -9; //retorna -9 para indicar que o CNPJ nÃ£o foi localizado
+    return -9; //retorna -9 para indicar que o CNPJ nÃƒÂ£o foi localizado
 }
 
-int localizar_posicao_Lanchonete(int cLanch){ //*Localiza posições vazias do codigo lanchonete vetor da struct */
+int localizar_posicao_Lanchonete(int cLanch){ //*Localiza posiÃ§Ãµes vazias do codigo lanchonete vetor da struct */
     int s=0;
     while (lanch[s].codLanchonete != cLanch && s<50){
         s++;
     }
     if (lanch[s].codLanchonete == cLanch){
-        return s; //retorna a posiÃ§Ã£o do codigo Lanchonete
+        return s; //retorna a posiÃƒÂ§ÃƒÂ£o do codigo Lanchonete
     }
 
-    return -9; //retorna -9 para indicar que o codigo Lanchonete nÃ£o foi localizado
+    return -9; //retorna -9 para indicar que o codigo Lanchonete nÃƒÂ£o foi localizado
 }
 
-void altera_cliente(){ //*Faz alterações nos dados cadastrais lendo dados a partir do CPF e CNPJ */
+void altera_cliente(){ //*Faz alteraÃ§Ãµes nos dados cadastrais lendo dados a partir do CPF e CNPJ */
 
 	char cpf[11], cnpj[14], resposta;
 	int opc, posicao, i, pfCliente, pjCliente;
@@ -291,8 +291,8 @@ void altera_cliente(){ //*Faz alterações nos dados cadastrais lendo dados a part
 		system("cls");
 		printf("\n\nA L T E R A R   D A D O S   C A D A S T R A I S\n\n");
 
-		printf("\nDigite [1] para Pessoa Física.\n");
-		printf("Digite [2] para Pessoa Jurídica.\n");
+		printf("\nDigite [1] para Pessoa FÃ­sica.\n");
+		printf("Digite [2] para Pessoa JurÃ­dica.\n");
 		printf("Digite [3] para voltar.\n");
 		scanf("%d", &opc);
 
@@ -307,17 +307,17 @@ void altera_cliente(){ //*Faz alterações nos dados cadastrais lendo dados a part
 				gets(cpf);
 				fflush(stdin);
 
-				//verifica se o CPF jÃ¡ esta cadastrado
+				//verifica se o CPF jÃƒÂ¡ esta cadastrado
 				pfCliente = localiza_posicao_CPF(cpf);
 
 				if (pfCliente == -9){
-					printf("CPF não cadastrado. \n");
+					printf("CPF nÃ£o cadastrado. \n");
 					}else{
 						//Exibe os dados do Cliente
 						system("pause");
 						system("cls");
-						printf("\n\nD A D O S    C A D A S T R A I S    P E S S O A    F I S Í C A\n\n");
-						printf("Codigo Cdo Usuário: %d\n", cliente[pfCliente].codCliente);
+						printf("\n\nD A D O S    C A D A S T R A I S    P E S S O A    F I S Ã C A\n\n");
+						printf("Codigo Cdo UsuÃ¡rio: %d\n", cliente[pfCliente].codCliente);
 						printf("Nome: %s\n", cliente[pfCliente].nome);
 						printf("Sobrenome: %s\n", cliente[pfCliente].sobrenome);
 		            	printf("CPF: %s\n", cliente[pfCliente].cpf);
@@ -328,16 +328,16 @@ void altera_cliente(){ //*Faz alterações nos dados cadastrais lendo dados a part
 						printf("Senha: %s\n", cliente[pfCliente].senha);
 
 						do{
-							printf("\nDigite [1] se realmente deseja fazer alteração.\nDigite [2] para cancelar.\n");
+							printf("\nDigite [1] se realmente deseja fazer alteraÃ§Ã£o.\nDigite [2] para cancelar.\n");
 							scanf("%d", &opc);
 							if(opc>2 || opc<1){
-								printf("Opcação Invalida!! Digite uma opção válida!!");
+								printf("OpcaÃ§Ã£o Invalida!! Digite uma opÃ§Ã£o vÃ¡lida!!");
 							}
 						}while(opc>2 || opc<1);
 						//Realiza alteracoes nos dados
 						if(opc==1){
 							fflush(stdin);
-							printf("Código do Usuário: %d\n", cliente[pfCliente].codCliente);
+							printf("CÃ³digo do UsuÃ¡rio: %d\n", cliente[pfCliente].codCliente);
 							fflush(stdin);
 							printf("Digite seu novo Nome: ");
 							fflush(stdin);
@@ -369,16 +369,16 @@ void altera_cliente(){ //*Faz alterações nos dados cadastrais lendo dados a part
 				gets(cnpj);
 				fflush(stdin);
 
-				//verifica se o CNPJ jÃ¡ esta cadastrado
+				//verifica se o CNPJ jÃƒÂ¡ esta cadastrado
 				pjCliente = localiza_posicao_CNPJ(cnpj);
 
 				if (pjCliente == -9){
-					printf("CNPJ não cadastrado. \n");
+					printf("CNPJ nÃ£o cadastrado. \n");
 					}else{
 						//Exibe os dados do Cliente
 						system("pause");
 						system("cls");
-						printf("\n\nD A D O S    C A D A S T R A I S    P E S S O A    J U R Í D I C A \n\n");
+						printf("\n\nD A D O S    C A D A S T R A I S    P E S S O A    J U R Ã D I C A \n\n");
 						printf("Meu Codigo: %d\n", lanch[pjCliente].codLanchonete);
 						printf("Nome: %s\n", lanch[pjCliente].nome);
 						printf("Bairro: %s\n", lanch[pjCliente].bairro);
@@ -390,16 +390,16 @@ void altera_cliente(){ //*Faz alterações nos dados cadastrais lendo dados a part
 						printf("Login: %s\n", lanch[pjCliente].login);
 						printf("Senha: %s\n", lanch[pjCliente].senha);
 						do{
-							printf("\nDigite [1] se realmente deseja fazer alteração.\nDigite [2] para cancelar.\n");
+							printf("\nDigite [1] se realmente deseja fazer alteraÃ§Ã£o.\nDigite [2] para cancelar.\n");
 							scanf("%d", &opc);
 							if(opc>2 || opc<1){
-								printf("Opcação Invalida!! Digite uma opção válida!!");
+								printf("OpcaÃ§Ã£o Invalida!! Digite uma opÃ§Ã£o vÃ¡lida!!");
 							}
 						}while(opc>2 || opc<1);
 
 						//Realiza alteracoes nos dados
 						if(opc==1){
-							printf("Código do Usuário: %d\n", lanch[pjCliente].codLanchonete);
+							printf("CÃ³digo do UsuÃ¡rio: %d\n", lanch[pjCliente].codLanchonete);
 							printf("Digite seu novo Nome: ");fflush(stdin);
 							gets(lanch[pjCliente].nome);fflush(stdin);
 							printf("Digite seu novo Bairro: "); fflush(stdin);
@@ -422,10 +422,10 @@ void altera_cliente(){ //*Faz alterações nos dados cadastrais lendo dados a part
 			case 3:
 				break;
 			default:
-				printf("Opção Inválida!! Digite uma opção Válida!!!\n");
+				printf("OpÃ§Ã£o InvÃ¡lida!! Digite uma opÃ§Ã£o VÃ¡lida!!!\n");
 				break;
 				if(opc<2 && opc<1){
-					printf("Opção Inválida!! Digite uma opção Válida!!!\n");
+					printf("OpÃ§Ã£o InvÃ¡lida!! Digite uma opÃ§Ã£o VÃ¡lida!!!\n");
 				}
 		}
 	}while(opc!=3);
@@ -440,11 +440,11 @@ int modulo_Login(){ //* Localiza cadastros de logs/senha e compara dados */
 	printf("\n\n--------------ENTRE NA SUA CONTA--------------\n\n");
 
 	do{
-		printf("Digite [1] Pessoa Física.\n");
-		printf("Digite [2] Pessoa Jurídica.\n");
+		printf("Digite [1] Pessoa FÃ­sica.\n");
+		printf("Digite [2] Pessoa JurÃ­dica.\n");
 		scanf("%d", &opc);
 		if(opc!=2 && opc!=1){
-			printf("Opção Invalida!! Digite uma opção Válida!!\n");
+			printf("OpÃ§Ã£o Invalida!! Digite uma opÃ§Ã£o VÃ¡lida!!\n");
 		}
 	}while(opc!=2 && opc!=1);
 
@@ -454,14 +454,14 @@ int modulo_Login(){ //* Localiza cadastros de logs/senha e compara dados */
 		printf("Digite sua Senha: ");
 		scanf("%s", &Spf);
 		
-		//verifica se o LOGIN jÃ¡ esta cadastrado
+		//verifica se o LOGIN jÃƒÂ¡ esta cadastrado
 		pfLogin = localiza_posicao_LOGIN_PF(Lpf);
 		pfSenha = localiza_posicao_SENHA_PF(Spf);
 		if (pfLogin == -9 || pfSenha == -9 ){
-			printf("LOGIN não cadastrado!! Tente novamente.\n");
+			printf("LOGIN nÃ£o cadastrado!! Tente novamente.\n");
 			}else{
 				//Exibe os dados do Cliente
-				printf("\nOlá, %s %s\nCódigo do usuário: %d\n\n", cliente[pfLogin].nome, cliente[pfLogin].sobrenome, cliente[pfLogin].codCliente);
+				printf("\nOlÃ¡, %s %s\nCÃ³digo do usuÃ¡rio: %d\n\n", cliente[pfLogin].nome, cliente[pfLogin].sobrenome, cliente[pfLogin].codCliente);
 				menu_PF(pfLogin);
 			}
 	}
@@ -470,20 +470,20 @@ int modulo_Login(){ //* Localiza cadastros de logs/senha e compara dados */
 	scanf("%s", Lpj);
 	printf("Digite sua Senha: ");
 	scanf("%s", Spj);
-	//verifica se o LOGIN jÃ¡ esta cadastrado
+	//verifica se o LOGIN jÃƒÂ¡ esta cadastrado
 	pjLogin = localiza_posicao_LOGIN_PJ(Lpj);
 	pjSenha = localiza_posicao_SENHA_PJ(Spj);
 	if (pjLogin == -9 || pjSenha == -9 ){
-		printf("LOGIN não cadastrado!! Tente novamente.\n");
+		printf("LOGIN nÃ£o cadastrado!! Tente novamente.\n");
 		}else{
 			//Exibe os dados do Cliente
-			printf("\nOlá, %s \nCódigo do usuário: %d\n\n", lanch[pjLogin].nome, lanch[pjLogin].codLanchonete);
+			printf("\nOlÃ¡, %s \nCÃ³digo do usuÃ¡rio: %d\n\n", lanch[pjLogin].nome, lanch[pjLogin].codLanchonete);
 			menu_lanch(pjLogin);
 		}
 	}
 }
 
-void incluir_itemPedido(pfLogin){ //* função cadastra pedidos */
+void incluir_itemPedido(pfLogin){ //* funÃ§Ã£o cadastra pedidos */
 
 	int i, j, opc, qtd=0, lanchonete, lanche, item, resposta,y;
 	float valor=0, somaValor=0, taxa=0, acrescimos=0;
@@ -493,7 +493,7 @@ void incluir_itemPedido(pfLogin){ //* função cadastra pedidos */
 
 	j = localizar_pedido(-1);
     if (j == -9){
-        //nao localizou registro com codigo -1 ou seja nÃ£o tem posicao livre
+        //nao localizou registro com codigo -1 ou seja nÃƒÂ£o tem posicao livre
         printf("Nao tem vaga para cadastrar novos pedidos. Procure o responsavel pela TI\n");
 	    }else{
 			pedido[j].numPedido=Numeropedido;
@@ -518,16 +518,16 @@ void incluir_itemPedido(pfLogin){ //* função cadastra pedidos */
 				scanf("%d", &opc);
 				lanchonete = localizar_posicao_Lanchonete(opc);
 				if(opc!=lanch[lanchonete].codLanchonete){
-					printf("\nOpção não corresponde a Lanchonete da lista!! Digite uma opção da Lista ou tente mais tarde!!\n\n");
+					printf("\nOpÃ§Ã£o nÃ£o corresponde a Lanchonete da lista!! Digite uma opÃ§Ã£o da Lista ou tente mais tarde!!\n\n");
 				}
 			}while(opc!=lanch[lanchonete].codLanchonete);
 			do{
 				int t;
 				system("pause");
 				system("cls");
-				printf("\nC a r d á p i o    d a    L a n c h o n e t e\n\n"); //* <<<<<<<<<<<<<<<<<<<<<<<<REGISTRO HISTORICO DE BUGGGGG
+				printf("\nC a r d Ã¡ p i o    d a    L a n c h o n e t e\n\n"); //* <<<<<<<<<<<<<<<<<<<<<<<<REGISTRO HISTORICO DE BUGGGGG
 				printf("Bem vindo a Lanchonete: %s\n", lanch[lanchonete].nome);
-				printf("Número do Pedido: %d\n\n", pedido[j].numPedido);
+				printf("NÃºmero do Pedido: %d\n\n", pedido[j].numPedido);
 				apresentar_lanches(lanchonete);
 				
 				do{
@@ -535,7 +535,7 @@ void incluir_itemPedido(pfLogin){ //* função cadastra pedidos */
 					scanf("%d", &item);
 					lanche = localizar_posicao_cardapio(lanchonete, item);
 					if(item!=lanch[lanchonete].cardapio[lanche].codItem){
-						printf("Opção não corresponde ao item da lista!! Digite uma opção da Lista!!\n\n");
+						printf("OpÃ§Ã£o nÃ£o corresponde ao item da lista!! Digite uma opÃ§Ã£o da Lista!!\n\n");
 					}
 				}while(item!=lanch[lanchonete].cardapio[lanche].codItem);
 				
@@ -550,13 +550,13 @@ void incluir_itemPedido(pfLogin){ //* função cadastra pedidos */
 				printf("\nDigite [1] para incluir mais itens no seu pedido.\nDigite [2] para finalizar seu pedido.\n");
 				scanf("%d", &resposta);
 				if(resposta>2 && resposta<1){
-					printf("Opção Invalida!! Digite uma opção Válida!!!\n");
+					printf("OpÃ§Ã£o Invalida!! Digite uma opÃ§Ã£o VÃ¡lida!!!\n");
 				}
 			}while(resposta==1);
 
 			if(resposta==2){
 				system("cls");
-				printf("\nR e s u m o    d o    P e d i d o\n\n\nNúmero do Pedido: %d\nQuantidade de item do Pedido: %d\nValor total do Pedido: %.2f\n", pedido[j].numPedido, pedido[j].somaQtd, pedido[j].valorPedido);
+				printf("\nR e s u m o    d o    P e d i d o\n\n\nNÃºmero do Pedido: %d\nQuantidade de item do Pedido: %d\nValor total do Pedido: %.2f\n", pedido[j].numPedido, pedido[j].somaQtd, pedido[j].valorPedido);
 				printf("Total de itens: %d\n", pedido[j].somaQtd);
 	            printf("\nF O R M A S    D E    P A G A M E N T O\n");
 	            printf("ATENCAO!!! Pagamentos com CREDITO taxa adicional de 1.00 por item.\n\n");
@@ -564,7 +564,7 @@ void incluir_itemPedido(pfLogin){ //* função cadastra pedidos */
 					printf("[1] PIX [2] A VISTA [3] DEBITO [4] CREDITO: ");
 					scanf("%d", &resposta);
 					if(resposta>4 || resposta<1){
-					    	printf("\nOpcão inválida!!! Digite uma opcão válida para continuar!!\n\n");
+					    	printf("\nOpcÃ£o invÃ¡lida!!! Digite uma opcÃ£o vÃ¡lida para continuar!!\n\n");
 						}
 				}while(resposta>4 || resposta<1);
 				if(resposta == 1){
@@ -598,19 +598,19 @@ void incluir_lanchonete(){ //*Cadastro de  Lanchonete */
 	i = localizar_posicao_Lanchonete(-1);
 
 	if (i == -9){
-	    //nao localizou registro com codigo -1 ou seja nÃ£o tem posicao livre
+	    //nao localizou registro com codigo -1 ou seja nÃƒÂ£o tem posicao livre
 	    printf("Nao tem vaga para cadastrar novas Lanchonete. Procure o responsavel pela TI\n");
 	}else{
 
 		lanch[i].codLanchonete=NumeroLanchonete;
 		NumeroLanchonete++;
-		//Contrato de prestação de serviço */
-		printf("\nContrato de Prestação de Serviço.\n\n1-Prestadores de serviço tem direito a 20 slots grátis para inclusão de cardápio.\n2-Para adesão de mais slots consulte o setor de TI no Fale Conosco.\n3-Será cobrada taxa de transação por venda e por retirada(saque).\n\n");
+		//Contrato de prestaÃ§Ã£o de serviÃ§o */
+		printf("\nContrato de PrestaÃ§Ã£o de ServiÃ§o.\n\n1-Prestadores de serviÃ§o tem direito a 20 slots grÃ¡tis para inclusÃ£o de cardÃ¡pio.\n2-Para adesÃ£o de mais slots consulte o setor de TI no Fale Conosco.\n3-SerÃ¡ cobrada taxa de transaÃ§Ã£o por venda e por retirada(saque).\n\n");
 	
 		system("pause");
 		system("cls");
 		printf("\n---C A D A S T R O    D E    L A N C H O N E T E---\n\n");
-		printf("\nCódigo do Assinante: %d", lanch[i].codLanchonete); fflush(stdin);
+		printf("\nCÃ³digo do Assinante: %d", lanch[i].codLanchonete); fflush(stdin);
 		printf("\nDigite o nome da sua lanchonete: ");fflush(stdin);
 		gets(lanch[i].nome);fflush(stdin);
 		printf("Digite Bairro onde localiza-se sua lanchonete: "); fflush(stdin);
@@ -625,7 +625,7 @@ void incluir_lanchonete(){ //*Cadastro de  Lanchonete */
 			printf("\n[1] Para adicionar mais contatos\n[2] para continuar\n");
 		    scanf("%d", &opc);
 		    if(opc>2 || opc==0){
-		        printf("Opção inválida!! Digite uma opção válida");
+		        printf("OpÃ§Ã£o invÃ¡lida!! Digite uma opÃ§Ã£o vÃ¡lida");
 		    }
 		    if(opc == 1){
 		    printf("Digite seu Contato 2 com DDD (--)-----/----: "); fflush(stdin);
@@ -635,13 +635,13 @@ void incluir_lanchonete(){ //*Cadastro de  Lanchonete */
 		    }
 	    }while(opc>2 || opc==0);
 	
-	    printf("\n5.Digite um Usuário(máximo 10 caractetes): "); fflush(stdin);
+	    printf("\n5.Digite um UsuÃ¡rio(mÃ¡ximo 10 caractetes): "); fflush(stdin);
 		gets(lanch[i].login); fflush(stdin);
-		printf("6.Digite uma Senha(máximo 10 caractetes): "); fflush(stdin);
+		printf("6.Digite uma Senha(mÃ¡ximo 10 caractetes): "); fflush(stdin);
 		gets(lanch[i].senha); fflush(stdin);
 	
 	
-		printf("\nCadastro concluído com sucesso!! Efetue seu Login e adicione seu cardápio.\n");
+		printf("\nCadastro concluÃ­do com sucesso!! Efetue seu Login e adicione seu cardÃ¡pio.\n");
 	
 		}
 }
@@ -650,13 +650,13 @@ void incluir_cliente(){ //* cadastro de Cliente */
 
 	int opc, i;
 	system("cls");
-	printf("Olá, Seja Bem Vindo(a).\n");
+	printf("OlÃ¡, Seja Bem Vindo(a).\n");
 	do{
 		system("pause");
 		system("cls");
-		printf("\n---SELECIONE UMA OPÇÃO---\n\n");
-		printf("\nDigite [1] para Pessoa Física.\n");
-		printf("Digite [2] para Pessoa Jurídica.\n");
+		printf("\n---SELECIONE UMA OPÃ‡ÃƒO---\n\n");
+		printf("\nDigite [1] para Pessoa FÃ­sica.\n");
+		printf("Digite [2] para Pessoa JurÃ­dica.\n");
 		printf("Digite [3] para Voltar.\n");
 		scanf("%d", &opc);
 
@@ -665,11 +665,11 @@ void incluir_cliente(){ //* cadastro de Cliente */
 		{
 			case 1:
 				system("cls");
-				printf("\n---C A D A S T R O    P E S S O A    F Í S I C A---\n\n\n");
+				printf("\n---C A D A S T R O    P E S S O A    F Ã S I C A---\n\n\n");
 				i = localizarCliente(-1);
 
 			    if (i == -9){
-			        //nao localizou registro com codigo -1 ou seja nÃ£o tem posicao livre
+			        //nao localizou registro com codigo -1 ou seja nÃƒÂ£o tem posicao livre
 			        printf("Nao tem vaga para cadastrar novos setores. Procure o responsavel pela TI\n");
 			    }else{
 
@@ -677,7 +677,7 @@ void incluir_cliente(){ //* cadastro de Cliente */
 					NumeroCliente++;
 					
 					fflush(stdin);
-					printf("Código do assinante: %d", cliente[i].codCliente);
+					printf("CÃ³digo do assinante: %d", cliente[i].codCliente);
 					fflush(stdin);
 					printf("\n1.Digite seu Primeiro Nome: ");
 					fflush(stdin);
@@ -700,7 +700,7 @@ void incluir_cliente(){ //* cadastro de Cliente */
 				        printf("\n[1] Para adicionar mais contatos\n[2] para continuar\n");
 				        scanf("%d", &opc);
 				        if(opc>2 || opc==0){
-				            printf("Opção inválida!! Digite uma opção válida");
+				            printf("OpÃ§Ã£o invÃ¡lida!! Digite uma opÃ§Ã£o vÃ¡lida");
 				        }
 				        if(opc == 1){
 				        printf("Digite seu Contato 2 com DDD (--)-----/----: ");fflush(stdin);
@@ -710,12 +710,12 @@ void incluir_cliente(){ //* cadastro de Cliente */
 				        }
 				    }while(opc>2 || opc==0);
 
-				    printf("\n5.Digite um Usuário(máximo 10 caractetes): "); fflush(stdin);
+				    printf("\n5.Digite um UsuÃ¡rio(mÃ¡ximo 10 caractetes): "); fflush(stdin);
 					gets(cliente[i].login); fflush(stdin);
-				    printf("6.Digite uma Senha(máximo 10 caractetes): "); fflush(stdin);
+				    printf("6.Digite uma Senha(mÃ¡ximo 10 caractetes): "); fflush(stdin);
 					gets(cliente[i].senha); fflush(stdin);
 
-				    printf("\nCadastro concluído com sucesso!! Efetue seu Login e comece suas compras.\n");
+				    printf("\nCadastro concluÃ­do com sucesso!! Efetue seu Login e comece suas compras.\n");
 				}
 				break;
 			case 2:
@@ -724,30 +724,30 @@ void incluir_cliente(){ //* cadastro de Cliente */
 
 			case 3:
 				break;
-			default: printf("Opção Inválida!! Digite uma opção Válida!!!\n\n");
+			default: printf("OpÃ§Ã£o InvÃ¡lida!! Digite uma opÃ§Ã£o VÃ¡lida!!!\n\n");
 		}
 	}while(opc>3 || opc==0);
 }
 
-void incluir_cardapio(int pjLogin){ //* função cadastra cardapio da lanchonete
+void incluir_cardapio(int pjLogin){ //* funÃ§Ã£o cadastra cardapio da lanchonete
 
 	int i, opc;
 do{
 	system("cls");
-	printf("\n\n---C A D A S T R E    S E U    C A R D Á P I O---\n\n");
+	printf("\n\n---C A D A S T R E    S E U    C A R D Ã P I O---\n\n");
 
 	i = localizar_posicao_cardapio(pjLogin, -1);
 
 	if(i == -9){
-	    //nao localizou registro com codigo -1 ou seja nÃ£o tem posicao livre
+	    //nao localizou registro com codigo -1 ou seja nÃƒÂ£o tem posicao livre
 	    printf("Nao tem vaga para cadastrar novos setores. Procure o responsavel pela TI\n");
 	}else{
 		system("cls");
 		
 		lanch[pjLogin].cardapio[i].codItem=NumeroCArdapio;
 		NumeroCArdapio++;
-		printf("\n---PREENCHA O FORMULÁRIO DO ITEM---\n");
-		printf("\nCódigo do lanche: %d\n", lanch[pjLogin].cardapio[i].codItem);
+		printf("\n---PREENCHA O FORMULÃRIO DO ITEM---\n");
+		printf("\nCÃ³digo do lanche: %d\n", lanch[pjLogin].cardapio[i].codItem);
 		fflush(stdin);
 		printf("Nome do Item: ");
 		gets(lanch[pjLogin].cardapio[i].NomeItem);
@@ -757,13 +757,13 @@ do{
 		printf("Quantidade em estoque: ");
 		scanf("%d", &lanch[pjLogin].cardapio[i].qtd);
 
-		printf("\n\nCadastro concluído com sucesso.\n\n");
+		printf("\n\nCadastro concluÃ­do com sucesso.\n\n");
 
 		do{
 			printf("Digite [1] para adicionar mais itens.\nDigite [2] para finalizar.\n");
 			scanf("%d", &opc);
 			if(opc!=2 && opc!=1){
-				printf("Opção inválida!! Digite uma opção válida\n\n");
+				printf("OpÃ§Ã£o invÃ¡lida!! Digite uma opÃ§Ã£o vÃ¡lida\n\n");
 			}
 		}while(opc!=2 && opc!=1);
 	
@@ -772,7 +772,7 @@ do{
 
 }
 
-void inicializarCadastro(){ //* contagem para inicialização de cod cliente, cod lanchonete, cod cardapio */
+void inicializarCadastro(){ //* contagem para inicializaÃ§Ã£o de cod cliente, cod lanchonete, cod cardapio */
 
     int s, j, i, p;
 
@@ -802,12 +802,12 @@ int main(){
 		system("color E4");
 		printf("\n------ M E N U    I N I C I A L ------\n\n\n");
 		printf("1.Cadastre-se!\n");
-		printf("2.Faça seu Login!\n");
+		printf("2.FaÃ§a seu Login!\n");
 		printf("3.Alterar dados cadastrais.\n");
 		printf("4.Sair\n");
 		printf("5.Carrega Beta Test.\n");
 
-		printf("\n\nSelecione uma opção: ");
+		printf("\n\nSelecione uma opÃ§Ã£o: ");
 		scanf("%d", &opc);
 
 		switch(opc)
@@ -818,7 +818,7 @@ int main(){
 					printf("Digite [6] para retornar ao Menu Inicial\n");
 					scanf("%d", &opc);
 					if(opc!=6){
-						printf("Opção Invalida!! Digite uma opção Válida!!!\n");
+						printf("OpÃ§Ã£o Invalida!! Digite uma opÃ§Ã£o VÃ¡lida!!!\n");
 					}
 				}while(opc!=6);
 				break;
@@ -828,7 +828,7 @@ int main(){
 					printf("Digite [6] para retornar ao Menu Inicial\n");
 					scanf("%d", &opc);
 					if(opc!=6){
-						printf("Opção Invalida!! Digite uma opção Válida!!!\n");
+						printf("OpÃ§Ã£o Invalida!! Digite uma opÃ§Ã£o VÃ¡lida!!!\n");
 					}
 				}while(opc!=6);
 				break;
@@ -838,7 +838,7 @@ int main(){
 					printf("Digite [6] para retornar ao Menu Inicial\n");
 						scanf("%d", &opc);
 						if(opc!=6){
-							printf("Opção Invalida!! Digite uma opção Válida!!!\n");
+							printf("OpÃ§Ã£o Invalida!! Digite uma opÃ§Ã£o VÃ¡lida!!!\n");
 						}
 				}while(opc!=6);
 				break;
@@ -881,7 +881,7 @@ int main(){
 				(strcpy(lanch[2].login , "L")); 
 				(strcpy(lanch[2].senha , "s"));
 
-				//*cardapio posição 0
+				//*cardapio posiÃ§Ã£o 0
 				lanch[0].cardapio[0].codItem=1;
 				(strcpy(lanch[0].cardapio[0].NomeItem , "coxinha sem catupiry"));
 				lanch[0].cardapio[0].valor = 10.00;
@@ -896,7 +896,7 @@ int main(){
 				(strcpy(lanch[0].cardapio[2].NomeItem,"Pastel"));
 				lanch[0].cardapio[2].valor = 15.00;
 				lanch[0].cardapio[2].qtd = 20;
-				//*cardapio posição 1
+				//*cardapio posiÃ§Ã£o 1
 				lanch[1].cardapio[0].codItem=1;
 				(strcpy(lanch[1].cardapio[0].NomeItem , "coxinha sem catupiry"));
 				lanch[1].cardapio[0].valor = 10.00;
@@ -911,7 +911,7 @@ int main(){
 				(strcpy(lanch[1].cardapio[2].NomeItem,"Pastel"));
 				lanch[1].cardapio[2].valor = 15.00;
 				lanch[1].cardapio[2].qtd = 20; 
-				//*cardapio posição 3
+				//*cardapio posiÃ§Ã£o 3
 				lanch[2].cardapio[0].codItem=1;
 				(strcpy(lanch[2].cardapio[0].NomeItem , "coxinha sem catupiry"));
 				lanch[2].cardapio[0].valor = 10.00;
@@ -927,7 +927,7 @@ int main(){
 				lanch[2].cardapio[2].valor = 15.00;
 				lanch[2].cardapio[2].qtd = 20; 	
 				break;
-			default: printf("Opção Invalida!! Digite uma opção Válida!!!\n");
+			default: printf("OpÃ§Ã£o Invalida!! Digite uma opÃ§Ã£o VÃ¡lida!!!\n");
 		}
 	}while(opc>4 || opc==0);
 
